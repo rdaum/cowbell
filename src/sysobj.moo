@@ -6,12 +6,18 @@ object SYSOBJ
 
   property ambiguous (owner: HACKER, flags: "r") = AMBIGUOUS;
   property arch_wizard (owner: HACKER, flags: "r") = ARCH_WIZARD;
+  property base_renderer (owner: HACKER, flags: "r") = BASE_RENDERER;
   property block (owner: HACKER, flags: "r") = BLOCK;
   property builder (owner: HACKER, flags: "r") = BUILDER;
   property event (owner: HACKER, flags: "r") = EVENT;
   property failed_match (owner: HACKER, flags: "r") = FAILED_MATCH;
   property first_room (owner: HACKER, flags: "r") = FIRST_ROOM;
   property hacker (owner: HACKER, flags: "r") = HACKER;
+  property html_div (owner: HACKER, flags: "r") = HTML_DIV;
+  property html_p (owner: HACKER, flags: "r") = HTML_P;
+  property html_renderer (owner: HACKER, flags: "r") = HTML_RENDERER;
+  property html_span (owner: HACKER, flags: "r") = HTML_SPAN;
+  property html_time (owner: HACKER, flags: "r") = HTML_TIME;
   property list (owner: HACKER, flags: "r") = LIST;
   property login (owner: HACKER, flags: "r") = LOGIN;
   property look (owner: HACKER, flags: "r") = LOOK;
@@ -19,12 +25,15 @@ object SYSOBJ
   property password (owner: HACKER, flags: "r") = PASSWORD;
   property player (owner: HACKER, flags: "r") = PLAYER;
   property prog (owner: HACKER, flags: "r") = PROG;
+  property render_pipeline (owner: HACKER, flags: "r") = RENDER_PIPELINE;
   property room (owner: HACKER, flags: "r") = ROOM;
   property root (owner: HACKER, flags: "r") = ROOT;
   property string (owner: HACKER, flags: "r") = STRING;
   property sub (owner: HACKER, flags: "r") = SUB;
   property sysobj (owner: HACKER, flags: "r") = SYSOBJ;
+  property text_renderer (owner: HACKER, flags: "r") = TEXT_RENDERER;
   property thing (owner: HACKER, flags: "r") = THING;
+  property timestamp_stage (owner: HACKER, flags: "r") = TIMESTAMP_STAGE;
   property wiz (owner: HACKER, flags: "r") = WIZ;
 
   verb do_login_command (this none this) owner: ARCH_WIZARD flags: "rxd"
