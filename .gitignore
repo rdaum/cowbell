@@ -1,0 +1,31 @@
+# Generated object directory
+gen.objdir/
+
+# Build artifacts
+gen.moo-textdump
+
+# Local daemon data
+local-daemon-data/
+
+# Private journal
+.private-journal/
+
+# macOS
+.DS_Store
+
+# Moor host data (contains keys)
+.moor-host-data/
+
+# Local Makefile configuration
+.env.mk
+
+# LLM agent configuration (local only)
+AGENTS.md
+.mcp.json
+.claude/
+
+# Daemon PID file
+.moor-daemon.pid
+
+# IPC sockets
+moor-ipc/

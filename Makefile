@@ -1,6 +1,15 @@
+# Optional local configuration (create .env.mk for overrides)
+-include .env.mk
+
 # MOORC binary selection via environment variable MOORC_TYPE
 # Options: cargo (default), direct, docker
 MOORC_TYPE ?= cargo
+
+# Path to mooR source checkout (default assumes cowbell is in moor/cores/cowbell/)
+MOOR_DIR ?= ../..
+
+# Build profile for mooR binaries (debug or release)
+BUILD_PROFILE ?= debug
 
 # DEBUG controls whether to run moorc under gdb
 # Set DEBUG=1 to enable gdb debugging
@@ -20,16 +29,16 @@ SRC_DIRECTORY = src
 TEST_DIRECTORY = tests
 OUTPUT_DIRECTORY = .
 ifeq ($(DEBUG),1)
-MOORC = gdb --batch --ex "handle SIGUSR1 nostop noprint pass" --ex run --ex bt --ex quit --args cargo run -p moorc -- \
+MOORC = gdb --batch --ex "handle SIGUSR1 nostop noprint pass" --ex run --ex bt --ex quit --args cargo run --manifest-path $(MOOR_DIR)/Cargo.toml -p moorc -- \
 	$(OPTIONS)
 else
-MOORC = cargo run -p moorc -- $(OPTIONS)
+MOORC = cargo run --manifest-path $(MOOR_DIR)/Cargo.toml -p moorc -- $(OPTIONS)
 endif
 else ifeq ($(MOORC_TYPE),direct)
 SRC_DIRECTORY = src
 TEST_DIRECTORY = tests
 OUTPUT_DIRECTORY = .
-MOORC = ../moor/target/debug/moorc $(OPTIONS)
+MOORC = $(MOOR_DIR)/target/$(BUILD_PROFILE)/moorc $(OPTIONS)
 else ifeq ($(MOORC_TYPE),docker)
 SRC_DIRECTORY = /work/src
 TEST_DIRECTORY = /work/tests
@@ -65,4 +74,16 @@ clean:
 	rm -rf gen.objdir
 
 output: gen.moo-textdump
+
+# Daemon management targets (delegates to script for mode-aware handling)
+start:
+	@./scripts/daemon.sh start
+
+stop:
+	@./scripts/daemon.sh stop
+
+status:
+	@./scripts/daemon.sh status
+
+.PHONY: start stop status clean test rebuild ometa ometa-list output
 
